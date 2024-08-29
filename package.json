@@ -1,0 +1,19 @@
+{
+  "name": "canterasportbackend",
+  "version": "1.0.0",
+  "description": "Proyecto",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "express",
+    "jwt",
+    "sequalize"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
