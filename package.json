@@ -4,6 +4,8 @@
   "description": "Proyecto",
   "main": "index.js",
   "scripts": {
+    "start": "node index.ts",
+    "server": "nodemon index.ts",
     "test": ""
   },
   "keywords": [
@@ -14,6 +16,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mariadb": "^3.3.1",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
