@@ -4,6 +4,8 @@
   "description": "Proyecto",
   "main": "index.js",
   "scripts": {
+    "start": "node index.ts",
+    "server": "nodemon index.ts",
     "test": ""
   },
   "keywords": [
@@ -14,9 +16,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "mariadb": "^3.3.1"
+    "mariadb": "^3.3.1",
+    "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.5.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
