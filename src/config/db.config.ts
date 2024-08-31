@@ -1,5 +1,6 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv"
+import { Usuario } from "../models/Usuarios";
 
 dotenv.config({ path: ".env" });
 
@@ -10,6 +11,7 @@ const db = new Sequelize(
     host: process.env.DATABASE_HOST,
     port: 3306,
     dialect: 'mariadb',
+    models: [Usuario],
     define: {
         timestamps: true
     },
