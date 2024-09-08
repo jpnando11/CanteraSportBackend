@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import db from './src/config/db.config'
 import * as dotenv from 'dotenv';
 import usuarioRoutes from './src/routes/usuariosRoute';
+import cursosRoute from './src/routes/cursoRoutes';
 
 const PORT: number = 3000
 const app: Application = express();
@@ -12,7 +13,7 @@ app.use(morgan("dev"))
 app.use(json());
 app.use(urlencoded({ extended: true }))
 
-dotenv.config();
+dotenv.config({ path: ".env" });
 
 // CONEXIÓN A LA BASE DE DATOS
 (async () => {
@@ -29,6 +30,7 @@ dotenv.config();
 
 
 app.use('/auth', usuarioRoutes)
+app.use('/curso', cursosRoute)
 
 // LEVANTAR EL SERVIDOR
 app.listen(PORT, () => {
