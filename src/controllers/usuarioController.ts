@@ -1,19 +1,102 @@
 import { Request, Response, RequestHandler } from 'express'
 import { Usuario } from '../models/Usuarios'
+import { checkPassword, hashPassword } from '../utils/auth';
+import { generateJWT } from '../utils/jwt';
+
+
+
 
 const crearUsuario: RequestHandler = async (req: Request, res: Response) => {
     try {
-        console.log("Contorller");
-        console.log(req.body);
+        const { primer_nombre,
+            segundo_nombre,
+            primer_apellido,
+            segundo_apellido,
+            correo,
+            telefono,
+            contrasena,
+            tipo_identificacion,
+            identificacion
+        } = req.body;
 
-        const usuario = await Usuario.create({ ...req.body })
+        if (!primer_nombre ||
+            !segundo_nombre ||
+            !primer_apellido ||
+            !segundo_apellido ||
+            !correo ||
+            !telefono ||
+            !contrasena ||
+            !tipo_identificacion ||
+            !identificacion
+        ) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+        }
+
+        const isUsuaririoExiste = await Usuario.findAll({
+            attributes: ['correo'],
+            where: {
+                correo
+            }
+        });
+
+        if (isUsuaririoExiste.length > 0) {
+            return res.status(409).json({ error: 'El usuario ya existe' });
+        };
+
+
+        const user = { ...req.body }
+
+        user.contrasena = await hashPassword(user.contrasena);
+
+        const usuario = await Usuario.create(user)
+
         res.status(201).json(usuario);
+
     } catch (error) {
         res.status(500).json({ "message": "Hubo un error creando el usuario", "error": (error as Error).message })
     }
 }
 
 
+
+const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
+    try {
+
+        const { correo, contrasena } = req.body
+        // Verificar si existe el usuario
+        const usuario = await Usuario.findAll({
+            attributes: ['correo', 'contrasena'],
+            where: {
+                correo
+            }
+        });
+
+        if (usuario.length === 0) {
+            return res.status(404).json({ error: "Usuario no encontrado" })
+        }
+        const usuarioDb = usuario[0].dataValues;
+
+        // Revisar Password
+        const isPasswordCorrect = await checkPassword(contrasena, usuarioDb.contrasena);
+
+        console.log(isPasswordCorrect);
+
+
+        if (!isPasswordCorrect) {
+            return res.status(403).json({ error: 'Contraseña incorrecta' })
+        };
+
+
+        const token = generateJWT({ correo: usuarioDb.correo });
+        res.send(token);
+
+    } catch (error) {
+        res.status(500).json({ error: 'Hubo un error' })
+    }
+}
+
+
 export {
-    crearUsuario
+    crearUsuario,
+    loginUsuario
 }
