@@ -1,11 +1,12 @@
 import express from "express";
-import { informacionGeneral } from "../controllers/cursosController";
-import { authenticate } from "../middleware/auth";
+import { createCurso, listCurso, listCursos } from "../controllers/cursosController";
 
 const cursosRoute = express.Router();
 
-cursosRoute.use(authenticate)
+cursosRoute.post('/createCurso', createCurso)
 
-cursosRoute.get('/informacionGeneral', informacionGeneral)
+cursosRoute.get('/listCursos', listCursos)
+
+cursosRoute.get('/listCurso/:id', listCurso)
 
 export default cursosRoute;
