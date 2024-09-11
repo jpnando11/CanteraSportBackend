@@ -39,6 +39,12 @@ export class Usuario extends Model<Usuario> {
     segundo_apellido!: string
 
     @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    edad!: number
+
+    @Column({
         type: DataType.STRING(100),
         allowNull: false,
     })
@@ -67,5 +73,11 @@ export class Usuario extends Model<Usuario> {
         allowNull: false,
     })
     identificacion!: string
+
+    @Column({
+        type: DataType.STRING(15),
+        allowNull: false,
+    })
+    rol!: string  // ESTUDIANTE, ADMITRADOR
 }
 

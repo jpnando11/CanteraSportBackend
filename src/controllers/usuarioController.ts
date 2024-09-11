@@ -50,7 +50,7 @@ const crearUsuario: RequestHandler = async (req: Request, res: Response) => {
 
         const usuario = await Usuario.create(user)
 
-        res.status(201).json(usuario);
+        res.status(201).json({ mensagge: "Estudiante creado exitosamente", usuario });
 
     } catch (error) {
         res.status(500).json({ "message": "Hubo un error creando el usuario", "error": (error as Error).message })
@@ -95,8 +95,18 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
     }
 }
 
+const listEstudiantes: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const estudiantes = await Usuario.findAll();
+        res.status(200).json(estudiantes)
+    } catch (error) {
+        res.status(500).json({ error: 'Hubo un error' })
+    }
+}
+
 
 export {
     crearUsuario,
-    loginUsuario
+    loginUsuario,
+    listEstudiantes
 }
