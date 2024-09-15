@@ -67,29 +67,19 @@ export class Usuario extends Model<Usuario> {
     })
     tipo_identificacion!: string;
 
-    @Column({
-        type: DataType.STRING(15),
-        allowNull: false
-    })
-    identificacion!: string;
 
     @Column({
         type: DataType.STRING(15),
         allowNull: false,
         defaultValue: 'user'
     })
-<<<<<<< HEAD
-=======
     identificacion!: string
 
     @Column({
         type: DataType.STRING(15),
         allowNull: false,
     })
-    rol!: string  // ESTUDIANTE, ADMITRADOR
+    role!: string  // ESTUDIANTE, ADMITRADOR
 }
->>>>>>> 2aaf0b0fdbbf59d9de5e366e82b3ec84540a01bd
 
     
-    role!: string;
-}
