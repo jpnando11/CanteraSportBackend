@@ -9,63 +9,70 @@ export class Usuario extends Model<Usuario> {
         type: DataType.INTEGER,
         allowNull: false,
         primaryKey: true,
-        unique: true,
         autoIncrement: true
     })
-    id_usuario!: number
+    id_usuario!: number;
 
     @Column({
         type: DataType.STRING(45),
         allowNull: false
     })
-    primer_nombre!: string
+    primer_nombre!: string;
 
     @Column({
         type: DataType.STRING(45),
         allowNull: false
     })
-    segundo_nombre!: string
+    segundo_nombre!: string;
 
     @Column({
         type: DataType.STRING(45),
-        allowNull: false,
+        allowNull: false
     })
-    primer_apellido!: string
+    primer_apellido!: string;
 
     @Column({
         type: DataType.STRING(45),
-        allowNull: false,
+        allowNull: false
     })
-    segundo_apellido!: string
+    segundo_apellido!: string;
 
     @Column({
         type: DataType.STRING(100),
-        allowNull: false,
+        allowNull: false
     })
-    correo!: string
+    correo!: string;
 
     @Column({
         type: DataType.STRING(45),
-        allowNull: false,
+        allowNull: false
     })
-    telefono!: string
+    telefono!: string;
 
     @Column({
         type: DataType.STRING(255),
-        allowNull: false,
+        allowNull: false
     })
-    contrasena!: string
+    contrasena!: string;
 
     @Column({
         type: DataType.STRING(10),
-        allowNull: false,
+        allowNull: false
     })
-    tipo_identificacion!: string
+    tipo_identificacion!: string;
+
+    @Column({
+        type: DataType.STRING(15),
+        allowNull: false
+    })
+    identificacion!: string;
 
     @Column({
         type: DataType.STRING(15),
         allowNull: false,
+        defaultValue: 'user'
     })
-    identificacion!: string
-}
 
+    
+    role!: string;
+}
