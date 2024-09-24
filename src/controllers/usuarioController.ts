@@ -65,7 +65,7 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
         const { correo, contrasena } = req.body
         // Verificar si existe el usuario
         const usuario = await Usuario.findAll({
-            attributes: ['correo', 'contrasena'],
+            attributes: ['correo', 'contrasena', 'rol'],
             where: {
                 correo
             }
@@ -79,15 +79,12 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
         // Revisar Password
         const isPasswordCorrect = await checkPassword(contrasena, usuarioDb.contrasena);
 
-        console.log(isPasswordCorrect);
-
-
         if (!isPasswordCorrect) {
             return res.status(403).json({ error: 'Contraseña incorrecta' })
         };
 
 
-        const token = generateJWT({ correo: usuarioDb.correo });
+        const token = generateJWT({ correo: usuarioDb.correo, rol: usuarioDb.rol });
         res.send(token);
 
     } catch (error) {
@@ -97,16 +94,20 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
 
 const listEstudiantes: RequestHandler = async (req: Request, res: Response) => {
     try {
-        const estudiantes = await Usuario.findAll();
+        const estudiantes = await Usuario.findAll({ offset: 1, limit: 9 });
         res.status(200).json(estudiantes)
     } catch (error) {
         res.status(500).json({ error: 'Hubo un error' })
     }
 }
 
+const getUser: RequestHandler = async (req: Request, res: Response) => {
+    res.status(200).json(req.user)
+}
 
 export {
     crearUsuario,
     loginUsuario,
-    listEstudiantes
+    listEstudiantes,
+    getUser
 }
