@@ -6,22 +6,16 @@ import usuarioRoutes from './src/routes/usuariosRoute';
 import cursosRoute from './src/routes/cursoRoutes';
 import cors from 'cors';
 import incripcionesRoute from './src/routes/incripcionesRoutes';
+import eventoRoutes from './src/routes/eventoRoutes';
 
-const PORT: number = 3000;
+const PORT: number = 4002;
 const app: Application = express();
 
-<<<<<<< HEAD
-// HABILITAR LECTURA DE DATOS DE FORMULARIOS
-app.use(morgan("dev"));
-app.use(json());
-app.use(urlencoded({ extended: true }));
-=======
 // HABILITAR LECTURA DE DATOS DE FORMUALRIOS
 app.use(morgan("dev"));
 app.use(json());
 app.use(cors());
 app.use(urlencoded({ extended: true }))
->>>>>>> 2aaf0b0fdbbf59d9de5e366e82b3ec84540a01bd
 
 dotenv.config({ path: ".env" });
 
@@ -32,7 +26,7 @@ dotenv.config({ path: ".env" });
         console.log("Conexión a la base de datos exitosa");
 
         // Sincronizar la base de datos antes de iniciar el servidor
-        await db.sync({ alter: true });
+        await db.sync({ force: false });
         console.log("Base de datos sincronizada");
 
         // LEVANTAR EL SERVIDOR después de la sincronización
@@ -45,17 +39,9 @@ dotenv.config({ path: ".env" });
     }
 })();
 
-<<<<<<< HEAD
-app.use('/auth', usuarioRoutes);
-=======
 
 app.use('/auth', usuarioRoutes)
 app.use('/curso', cursosRoute)
 app.use('/incripciones', incripcionesRoute)
-
-// LEVANTAR EL SERVIDOR
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
-
-});
->>>>>>> 2aaf0b0fdbbf59d9de5e366e82b3ec84540a01bd
+app.use('/api/eventos', eventoRoutes);
+console.log("Rutas de eventos cargadas: /api/eventos");

@@ -20,7 +20,7 @@ async function findUserByEmailAndModalidad(email, modalidad) {
             "SELECT * FROM usuarios WHERE email = ? AND modalidad = ?", 
             [email, modalidad]
         );
-        return result[0]; // Retorna el primer usuario encontrado
+        return result[0]; 
     } finally {
         conn.release();
     }

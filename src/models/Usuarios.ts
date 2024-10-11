@@ -79,7 +79,7 @@ export class Usuario extends Model<Usuario> {
         type: DataType.STRING(15),
         allowNull: false,
     })
-    role!: string  // ESTUDIANTE, ADMITRADOR
+    rol!: string  
 }
 
     

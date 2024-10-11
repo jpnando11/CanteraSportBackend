@@ -13,25 +13,6 @@ console.log("DATABASE_PASSWORD: ", process.env.DATABASE_PASSWORD);
 const db = new Sequelize(
     process.env.DATABASE_NAME!,
     process.env.DATABASE_USER!,
-<<<<<<< HEAD
-    process.env.DATABASE_PASSWORD!, 
-    {
-        host: process.env.DATABASE_HOST!,
-        port: 3306,
-        dialect: 'mariadb',
-        models: [Usuario],
-        define: {
-            timestamps: true
-        },
-        pool: {
-            max: 5,
-            min: 0,
-            acquire: 3000,
-            idle: 10000
-        },
-    }
-);
-=======
     process.env.DATABASE_PASSWORD ?? '', {
     host: process.env.DATABASE_HOST,
     port: 3306,
@@ -47,6 +28,6 @@ const db = new Sequelize(
         idle: 10000
     },
 })
->>>>>>> 2aaf0b0fdbbf59d9de5e366e82b3ec84540a01bd
+
 
 export default db;

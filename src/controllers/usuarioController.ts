@@ -34,7 +34,7 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
         // Buscar al usuario por correo y asegurarse de incluir la contraseña y el rol
         const usuario = await Usuario.findOne({
             where: { correo },
-            attributes: ['id_usuario', 'contrasena', 'role']
+            attributes: ['id_usuario', 'contrasena', 'rol']
         });
         console.log('Usuario encontrado:', usuario);
         
@@ -57,7 +57,7 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
 
         // Generar el token JWT si la contraseña es válida
         const token = jwt.sign(
-            { id: usuario.id_usuario, role: usuario.role },
+            { id: usuario.id_usuario, rol: usuario.rol },
             SECRET_KEY,
             { expiresIn: '1h' }
         );
@@ -69,4 +69,17 @@ const loginUsuario: RequestHandler = async (req: Request, res: Response) => {
     }
 };
 
-export { crearUsuario, loginUsuario };
+// Listar estudiantes
+const listEstudiantes: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const estudiantes = await Usuario.findAll({
+            where: { rol: 'estudiante' }, 
+            attributes: ['id_usuario', 'nombre', 'correo']  
+        });
+
+        res.status(200).json(estudiantes);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al listar estudiantes', error: (error as Error).message });
+    }
+};
+export { crearUsuario, loginUsuario, listEstudiantes };
