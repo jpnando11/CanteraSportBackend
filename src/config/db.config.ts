@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import { Usuario } from "../models/Usuarios";
 import { Curso } from "../models/Cusro";
 import { Incripciones } from "../models/Incripciones";
+import { UsuarioCurso } from "../models/UsuarioCurso";
 
 dotenv.config({ path: ".env" });
 
@@ -13,7 +14,7 @@ const db = new Sequelize(
     host: process.env.DATABASE_HOST,
     port: 3306,
     dialect: 'mariadb',
-    models: [Usuario, Curso, Incripciones],
+    models: [Usuario, Curso, Incripciones, UsuarioCurso],
     define: {
         timestamps: true
     },

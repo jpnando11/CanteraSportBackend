@@ -1,4 +1,6 @@
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import { Table, Model, Column, DataType, BelongsToMany } from 'sequelize-typescript';
+import { Curso } from './Cusro';
+import { UsuarioCurso } from './UsuarioCurso';
 
 @Table({
     tableName: 'usuario',
@@ -79,5 +81,8 @@ export class Usuario extends Model<Usuario> {
         allowNull: false,
     })
     rol!: string  // ESTUDIANTE, ADMITRADOR
+
+    @BelongsToMany(() => Curso, () => UsuarioCurso)
+    cursos!: Curso[];
 }
 
