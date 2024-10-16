@@ -6,6 +6,7 @@ import usuarioRoutes from './src/routes/usuariosRoute';
 import cursosRoute from './src/routes/cursoRoutes';
 import cors from 'cors';
 import incripcionesRoute from './src/routes/incripcionesRoutes';
+import paymentrouter from './src/routes/paymentsRoutes';
 
 const PORT: number = 3000
 const app: Application = express();
@@ -35,6 +36,7 @@ dotenv.config({ path: ".env" });
 app.use('/auth', usuarioRoutes)
 app.use('/curso', cursosRoute)
 app.use('/incripciones', incripcionesRoute)
+app.use('/payments', paymentrouter)
 
 // LEVANTAR EL SERVIDOR
 app.listen(PORT, () => {

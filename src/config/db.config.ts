@@ -3,17 +3,18 @@ import dotenv from "dotenv"
 import { Usuario } from "../models/Usuarios";
 import { Curso } from "../models/Cusro";
 import { Incripciones } from "../models/Incripciones";
+import {Payment} from '../models/Payment';
 
 dotenv.config({ path: ".env" });
 
 const db = new Sequelize(
-    process.env.DATABASE_NAME!,
-    process.env.DATABASE_USER!,
-    process.env.DATABASE_PASSWORD ?? '', {
+    "cantera_sport",
+    "root",
+     'GIOVANNI.13.leal', {
     host: process.env.DATABASE_HOST,
-    port: 3306,
+    port: 3307,
     dialect: 'mariadb',
-    models: [Usuario, Curso, Incripciones],
+    models: [Usuario, Curso, Incripciones, Payment],
     define: {
         timestamps: true
     },
