@@ -1,4 +1,6 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript'
+import { Table, Column, Model, DataType, BelongsToMany } from 'sequelize-typescript'
+import { Usuario } from './Usuarios';
+import { UsuarioCurso } from './UsuarioCurso';
 
 @Table({
     tableName: 'curso',
@@ -33,9 +35,18 @@ export class Curso extends Model<Curso> {
     descripcion_curso!: string
 
     @Column({
+        type: DataType.STRING(1000),
+        allowNull: false,
+    })
+    maestro!: string
+
+    @Column({
         type: DataType.DECIMAL,
         allowNull: false,
     })
     costo_curso!: number
+
+    @BelongsToMany(() => Usuario, () => UsuarioCurso)
+    usuarios!: Usuario[];
 
 }
