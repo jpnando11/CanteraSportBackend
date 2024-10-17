@@ -107,6 +107,9 @@ const listEstudiantes: RequestHandler = async (req: Request, res: Response) => {
     }
 }
 
+const getUser: RequestHandler = async (req: Request, res: Response) => {
+    res.status(200).json(req.user)
+}
 
 const listMaestro: RequestHandler = async (req: Request, res: Response) => {
     try {

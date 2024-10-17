@@ -14,4 +14,6 @@ usuarioRoutes.get('/listUsuarioLogin', authenticate, getUser)
 usuarioRoutes.post('/editarEstudiante', editarUsuario)
 usuarioRoutes.get('/listMaestro', listMaestro)
 
+usuarioRoutes.get('/listUsuarioLogin', authenticate, getUser)
+
 export default usuarioRoutes;
