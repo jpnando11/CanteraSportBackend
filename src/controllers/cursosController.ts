@@ -2,7 +2,7 @@ import { Request, Response, RequestHandler } from 'express'
 import { Curso } from '../models/Cusro';
 
 const createCurso: RequestHandler = async (req: Request, res: Response) => {
-    // Aca va el codigo para crear un curso
+    
 
     try {
         const { nombre_curso, nivel_categorias, descripcion_curso, costo_curso } = req.body;

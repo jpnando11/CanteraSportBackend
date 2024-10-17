@@ -85,4 +85,3 @@ export class Usuario extends Model<Usuario> {
     @BelongsToMany(() => Curso, () => UsuarioCurso)
     cursos!: Curso[];
 }
-
